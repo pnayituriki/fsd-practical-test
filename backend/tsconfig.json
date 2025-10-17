@@ -24,7 +24,7 @@
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "auto",
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
-  "include":["src"]
+  "include": ["src", "src/config"]
 }
