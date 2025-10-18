@@ -5,4 +5,4 @@ import { cryptoRouter } from "./crypto.routes";
 export const router = Router();
 
 router.use("/users", usersRouter);
-router.use("/secret", cryptoRouter);
+router.use("/crypto", cryptoRouter);
