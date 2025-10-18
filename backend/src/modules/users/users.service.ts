@@ -90,7 +90,7 @@ export class UsersService {
     }
   }
 
-  analytics() {
+  graph7d() {
     try {
       return this.repo.countCreatedByDaySince(7);
     } catch (err) {
