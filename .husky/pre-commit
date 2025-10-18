@@ -1,0 +1,4 @@
+echo "Running typecheck and tests before commit..."
+
+# npm run typecheck
+# npm run ci:test

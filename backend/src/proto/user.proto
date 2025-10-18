@@ -1,0 +1,17 @@
+package fsd_test;
+
+syntax = "proto3";
+
+message User {
+    string id = 1;
+    string email = 2;
+    string role = 3;
+    string status = 4;
+    int64 createdAt = 5;
+    string emailHash = 6; 
+    string signature = 7;
+}
+
+message UsersExport {
+    repeated User users = 1;
+}
