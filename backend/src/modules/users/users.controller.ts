@@ -5,7 +5,6 @@ import { Errors } from "../../utils/http-error";
 import { exportUsersProtobuf } from "./users.export";
 import { vld } from "../../utils/validate";
 
-type IdParam = { id: string };
 type CreateBody = {
   email: string;
   role?: string;
@@ -40,7 +39,7 @@ export class UsersController {
 
   update = (req: Request, res: Response, next: NextFunction) => {
     try {
-      const id = vld.str(req.params.id);
+      const id = vld.isUUID(req.params.id);
 
       if (Object.keys(req.body).length === 0) {
         throw Errors.BadRequest(
@@ -69,7 +68,7 @@ export class UsersController {
 
   remove = (req: Request, res: Response, next: NextFunction) => {
     try {
-      const id = vld.str(req.params.id);
+      const id = vld.isUUID(req.params.id);
       if (!id) throw Errors.BadRequest("User ID is required");
       this.service.remove(id);
       sendSuccess(res, "User deleted successfully");

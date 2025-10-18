@@ -6,3 +6,10 @@ coverage/
 .env
 .env.*
 backend/data/
+secrets/
+keys/
+*.pem
+*.key
+*.p12
+*.pfx
+/config/*.pem

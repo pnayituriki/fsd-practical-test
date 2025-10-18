@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { usersRouter } from "../modules/users/users.routes";
-import { cryptoRouter } from "./crypto.routes";
+import { cryptoRouter } from "../modules/crypto/crypto.routes";
 
 export const router = Router();
 

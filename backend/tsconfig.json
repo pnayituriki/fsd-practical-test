@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     // File Layout
+    "types": ["vitest/globals"],
     "rootDir": "./src",
     "outDir": "./dist",
 

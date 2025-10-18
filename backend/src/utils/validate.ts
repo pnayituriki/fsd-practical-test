@@ -1,5 +1,12 @@
 import { Errors } from "./http-error";
 
+export const isUUID = (value?: string, field: string = "id") => {
+  if (!value) throw Errors.BadRequest(`${field} is required!`);
+  const isValid = /^[0-9a-fA-F-]{36}$/.test(value);
+  if (!isValid) throw Errors.BadRequest(`Invalid ${field}.`);
+  return value;
+};
+
 const cleanString = (v: unknown): string => {
   if (typeof v !== "string") throw Errors.BadRequest("Expected string");
   const s = v.trim();
@@ -23,9 +30,7 @@ function enumOf<T extends readonly string[]>(
 ): T[number] {
   const s = cleanString(value);
   if (!allowed.includes(s)) {
-    throw Errors.BadRequest(
-      `Invalid ${field}. Allowed: ${allowed.join(", ")}`
-    );
+    throw Errors.BadRequest(`Invalid ${field}. Allowed: ${allowed.join(", ")}`);
   }
   return s as T[number];
 }
@@ -38,6 +43,7 @@ function optional<T>(fn: (v: unknown, field?: string) => T) {
 }
 
 export const vld = {
+  isUUID,
   str: cleanString,
   email,
   enum: enumOf,
