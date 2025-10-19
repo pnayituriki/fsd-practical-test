@@ -10,10 +10,11 @@ import "./db/migration";
 export const app = express();
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://fsd-practical-test.onrender.com",
-    ],
+    origin: (origin, callback) => {
+      // allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+      callback(null, true); // allow all origins
+    },
     methods: ["GET", "POST", "PATCH", "DELETE"],
   })
 );
