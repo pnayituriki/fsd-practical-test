@@ -8,7 +8,13 @@ import { logger } from "./utils/logger";
 import "./db/migration";
 
 export const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://fsd-practical-test.onrender.com"],
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+  })
+);
+
 app.use(express.json());
 app.use("/api", router);
 
