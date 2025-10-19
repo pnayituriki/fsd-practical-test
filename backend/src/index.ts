@@ -3,14 +3,17 @@ import cors from "cors";
 import path from "path";
 import { router } from "./routes/router";
 import { sendError } from "./utils/response";
-import { env } from "./config/env";
+import { env, isDev } from "./config/env";
 import { logger } from "./utils/logger";
 import "./db/migration";
 
 export const app = express();
 app.use(
   cors({
-    origin: ["https://fsd-practical-test.onrender.com"],
+    origin: [
+      "http://localhost:5173",
+      "https://fsd-practical-test.onrender.com",
+    ],
     methods: ["GET", "POST", "PATCH", "DELETE"],
   })
 );
