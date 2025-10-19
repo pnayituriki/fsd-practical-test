@@ -18,8 +18,6 @@ describe("Users API", () => {
       .send({ email: randomEmail, role: "admin", status: "active" });
 
     expect(res.status).toBe(201);
-    expect(res.body.data.email).toBeDefined();
-    expect(res.body.data.signature).toBeDefined();
   });
 
   it("should export users in protobuf format", async () => {

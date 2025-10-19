@@ -17,7 +17,7 @@ const cleanString = (v: unknown): string => {
 const email = (value: unknown, field = "email"): string => {
   if (!value) throw Errors.BadRequest("User email is required");
 
-  const s = cleanString(value).toLowerCase();
+  const s = cleanString(value).trim();
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!re.test(s)) throw Errors.BadRequest(`Invalid ${field}`);
   return s;

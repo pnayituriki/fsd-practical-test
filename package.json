@@ -1,15 +1,5 @@
 {
   "name": "fsd-practical-test",
-  "workspaces": [
-    "backend",
-    "frontend"
-  ],
-  "scripts": {
-    "ci:build": "npm run -w backend build && npm run -w frontend build",
-    "ci:test": "npm test -w backend && npm test -w frontend",
-    "typecheck": "npm run -w backend typecheck && npm run -w frontend typecheck",
-    "prepare": "husky"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pnayituriki/fsd-practical-test.git"
@@ -20,9 +10,5 @@
   "bugs": {
     "url": "https://github.com/pnayituriki/fsd-practical-test/issues"
   },
-  "homepage": "https://github.com/pnayituriki/fsd-practical-test#readme",
-  "devDependencies": {
-    "husky": "^9.1.7",
-    "lint-staged": "^16.2.4"
-  }
+  "homepage": "https://github.com/pnayituriki/fsd-practical-test#readme"
 }

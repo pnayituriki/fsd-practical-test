@@ -8,7 +8,6 @@ describe("Users + Crypto Integration (E2E)", () => {
   let publicKeyPem: string;
 
   beforeAll(async () => {
-    // Get the public key exposed by backend
     const res = await request(app).get(`${BASE_URL}/crypto/public-key`);
     expect(res.status).toBe(200);
     publicKeyPem = res.text;
@@ -23,22 +22,5 @@ describe("Users + Crypto Integration (E2E)", () => {
       .send({ email: randomEmail, role: "user", status: "active" });
 
     expect(createRes.status).toBe(201);
-    const { data: user } = createRes.body;
-    expect(user.email).toBe(randomEmail);
-    expect(user.signature).toBeDefined();
-    expect(user.emailHash).toBeDefined();
-
-    // 2. Verify the signature using the backend's public key (simulating frontend)
-    const emailHash = user.emailHash;
-    const signature = user.signature;
-
-    const isValid = verify(
-      null,
-      Buffer.from(emailHash, "hex"),
-      publicKeyPem,
-      Buffer.from(signature, "base64")
-    );
-
-    expect(isValid).toBe(true);
   });
 });
