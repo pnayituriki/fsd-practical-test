@@ -3,7 +3,7 @@ import cors from "cors";
 import path from "path";
 import { router } from "./routes/router";
 import { sendError } from "./utils/response";
-import { env, isDev } from "./config/env";
+import { env } from "./config/env";
 import { logger } from "./utils/logger";
 import "./db/migration";
 
