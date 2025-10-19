@@ -7,10 +7,21 @@ import { env } from "./config/env";
 import { logger } from "./utils/logger";
 import "./db/migration";
 
+const allowedOrigins = [
+  "https://fsd-practical-test.onrender.com",
+  "http://localhost:5173",
+];
+
 export const app = express();
 app.use(
   cors({
-    origin: "*",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PATCH", "DELETE"],
   })
 );
