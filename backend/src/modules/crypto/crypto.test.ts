@@ -1,6 +1,5 @@
 import request from "supertest";
 import fs from "fs";
-import path from "path";
 import { app } from "../..";
 import { cryptoManager } from "../../utils/crypto";
 

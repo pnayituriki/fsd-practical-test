@@ -1,8 +1,7 @@
 import request from "supertest";
-import { verify } from "crypto";
 import { app } from "../../index";
 
-const BASE_URL ='/api'
+const BASE_URL = "/api";
 
 describe("Users + Crypto Integration (E2E)", () => {
   let publicKeyPem: string;
