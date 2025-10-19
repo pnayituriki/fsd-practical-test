@@ -5,7 +5,7 @@ import { router } from "./routes/router";
 import { sendError } from "./utils/response";
 import { env } from "./config/env";
 import { logger } from "./utils/logger";
-import "../src/db/migration";
+import "./db/migration";
 
 export const app = express();
 app.use(cors());

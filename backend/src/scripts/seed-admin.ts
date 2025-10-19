@@ -1,8 +1,8 @@
-import { UsersService } from "../src/modules/users/users.service";
-import { logger } from "../src/utils/logger";
+import { UsersService } from "../modules/users/users.service";
+import { logger } from "../utils/logger";
 
 // Ensure DB schema exists
-import "../src/db/migration";
+import "../db/migration";
 
 (async () => {
   const svc = new UsersService();
