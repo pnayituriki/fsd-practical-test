@@ -1,6 +1,7 @@
 import { QueryClient, QueryCache, MutationCache } from "@tanstack/react-query";
 import { toast } from "sonner";
 import type { ApiErrorPayload } from "./fetcher";
+import { logger } from "./logger";
 
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -35,7 +36,7 @@ export const queryClient = new QueryClient({
         error.message ||
         "An unexpected error occurred while performing this action.";
 
-      console.error("[Mutation Error]", error);
+      logger.error("[Mutation Error]", error);
       toast.error("Action failed", { description: message });
     },
   }),

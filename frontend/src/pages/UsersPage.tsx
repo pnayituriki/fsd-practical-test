@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { toast } from "sonner";
+import * as XLSX from "xlsx";
 import { Button } from "../components/ui/button";
 import Filters, { type FiltersValue } from "../components/Filters";
 import UsersTable from "../components/UsersTable";
@@ -6,6 +8,7 @@ import { useVerifiedUsers } from "../hooks/useVerifiedUsers";
 import type { DecodedUser } from "../lib/protobuf";
 import { UserDialog } from "../components/UserDialog";
 import UserStats7d from "../components/UserStats7d";
+import { formatDate } from "../lib/utils";
 
 const UsersPage = () => {
   const [filters, setFilters] = useState<FiltersValue>({});
@@ -20,6 +23,34 @@ const UsersPage = () => {
 
   const { data: users, isLoading, isError, error } = useVerifiedUsers();
 
+  // Export users to Excel
+  const handleExportExcel = () => {
+    if (!users || users.length === 0) {
+      toast.warning("No users available to export.");
+      return;
+    }
+
+    try {
+      const exportData = users.map((u) => ({
+        ID: u.id,
+        Email: u.email,
+        Role: u.role,
+        Status: u.status,
+        CreatedAt: formatDate(u.createdAt),
+      }));
+
+      const worksheet = XLSX.utils.json_to_sheet(exportData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Users");
+
+      XLSX.writeFile(workbook, "users.xlsx");
+      toast.success("Users exported successfully!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to export users.");
+    }
+  };
+
   return (
     <section className="space-y-6 mx-8">
       <div className="sticky top-0 z-20 -mx-4 sm:mx-0 bg-background/75 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -28,6 +59,9 @@ const UsersPage = () => {
           <div className="flex gap-2">
             <Button onClick={() => setDialog({ open: true, mode: "create" })}>
               New User
+            </Button>
+            <Button variant="outline" onClick={handleExportExcel}>
+              Export (.xlsx)
             </Button>
           </div>
         </div>
